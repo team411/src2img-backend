@@ -2,10 +2,23 @@
 # -*- mode: python; coding: utf-8; -*-
 
 import sys
+from src2img.app import App
+import signal
 
 
 def main(argv):
-    pass
+    app = App()
+
+    def termination_signal_handler(signum, frame):
+        app.log.info('Got {0} signal, terminating...'.format(signum))
+        app.teardown()
+        sys.exit(0)
+
+    signal.signal(signal.SIGINT, termination_signal_handler)
+    signal.signal(signal.SIGTERM, termination_signal_handler)
+
+    app.setup()
+    app.run()
 
 if __name__ == '__main__':
     sys.exit(main(sys.argv))
