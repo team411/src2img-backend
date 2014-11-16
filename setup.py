@@ -11,7 +11,7 @@ def install_deps():
     cmd = [
         'export V8_HOME=`pwd`/../v8',
         'python setup.py build && python setup.py install',
-        'tools/build.sh'
+        '../../tools/build.sh'
     ]
     subprocess.call('sh -c "{0}"'.format(';'.join(cmd)),
                     shell=True, cwd=os.path.join(os.getcwd(), 'vendor/pyv8'))
