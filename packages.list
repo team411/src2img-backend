@@ -1,5 +1,5 @@
 libboost-python-dev
-libboost-thread1.55-dev
-libboost-system1.55-dev
+libboost-thread1.54-dev
+libboost-system1.54-dev
 python-dev
 scons
