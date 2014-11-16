@@ -33,11 +33,13 @@ class Routes(object):
                     key = None
                     if f.endswith(BEMJSON_KEY):
                         key = BEMJSON_KEY
+                        content = json.loads(fd.read())
                     elif f.endswith(BEMHTML_KEY):
                         key = BEMHTML_KEY
+                        content = fd.read()
 
                     if key is not None:
-                        self.assets[name][key] = fd.read()
+                        self.assets[name][key] = content
 
     def setup(self):
         fl = self._fl
