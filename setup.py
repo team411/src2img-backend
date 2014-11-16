@@ -13,9 +13,13 @@ def install_deps():
         'python setup.py build && python setup.py install',
         '../../tools/build.sh'
     ]
-    subprocess.call('sh -c "{0}"'.format(';'.join(cmd)),
-                    shell=True, cwd=os.path.join(os.getcwd(), 'vendor/pyv8'))
-    subprocess.call('pip install -r requirements.txt', shell=True)
+    retcode = subprocess.call('sh -c "{0}"'.format(';'.join(cmd)),
+                              shell=True, cwd=os.path.join(os.getcwd(), 'vendor/pyv8'))
+    if retcode != 0:
+        raise RuntimeError('Non zero exit code')
+    retcode = subprocess.call('pip install -r requirements.txt', shell=True)
+    if retcode != 0:
+        raise RuntimeError('Non zero exit code')
 
 
 class CustomInstallCommand(install):
