@@ -4,13 +4,17 @@
 import sys
 from src2img.app import App
 import signal
+import logging
+
+logging.basicConfig()
+log = logging.getLogger('init')
 
 
 def main(argv):
     app = App()
 
     def termination_signal_handler(signum, frame):
-        app.log.info('Got {0} signal, terminating...'.format(signum))
+        log.info('Got {0} signal, terminating...'.format(signum))
         app.teardown()
         sys.exit(0)
 

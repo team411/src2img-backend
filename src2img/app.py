@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 from .singleton import Singleton
 import os
 import logging
