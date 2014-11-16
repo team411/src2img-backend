@@ -4,3 +4,6 @@
 *.pyc
 *.egg-info
 build
+frontend
+assets
+pub/_
