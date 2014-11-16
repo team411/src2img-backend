@@ -59,7 +59,7 @@ class Routes(object):
 
         @fl.route('/', methods=['GET'])
         def index():
-            return renderer.ask({
+            return index_renderer.ask({
                 'bemjson': self.assets['index'][BEMJSON_KEY],
                 'gc': True,
                 'params': {'csrf': generate_csrf()}
