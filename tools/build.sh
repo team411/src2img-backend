@@ -3,7 +3,7 @@
 set -e
 export YENV=production
 
-git clone -b master https://github.com/team411/src2img.git frontend || true
+git clone -b master git@github.com:team411/src2img.git frontend || true
 make -C frontend build
 
 rm -rf assets
