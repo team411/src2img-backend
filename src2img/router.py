@@ -1,8 +1,8 @@
-import flask
+from flask import Flask
 
 
-class Router(flask.Flask):
+class Router(Flask):
 
     def __init__(self, name, config):
-        flask.Flask.__init__(self, name)
+        Flask.__init__(self, name)
         self.secret_key = config.get('flask', 'secret-key')

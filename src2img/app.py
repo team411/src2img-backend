@@ -29,6 +29,11 @@ if ENV == DEV_ENV:
 else:
     CONFIG_PATHS = ['/etc/src2img']
 
+logging.basicConfig()
+log = logging.getLogger('src2img')
+log.setLevel(
+    getattr(logging, os.environ.get('LOG_LEVEL', DEFAULT_LOG_LEVEL).upper()))
+
 
 class App(object):
     __metaclass__ = Singleton
@@ -40,10 +45,6 @@ class App(object):
     def setup(self):
         if self._ready:
             return
-        logging.basicConfig()
-        self.log = logging.getLogger('src2img')
-        self.log.setLevel(
-            getattr(logging, os.environ.get('LOG_LEVEL', DEFAULT_LOG_LEVEL).upper()))
         self.config = ConfigLoader(CONFIG_PATHS, CONFIG_NAME)
         self.router = Router('src2img', self.config)
         self._routes = Routes(self.router, self)
@@ -55,7 +56,7 @@ class App(object):
             raise RuntimeError('You need to call setup() first')
         host = self.config.get('flask', 'host')
         port = int(self.config.get('flask', 'port'))
-        self.log.info('Listening on {0}:{1}'.format(host, port))
+        log.info('Listening on {0}:{1}'.format(host, port))
         self.router.run(
             host=host,
             port=port,
@@ -64,5 +65,5 @@ class App(object):
         )
 
     def teardown(self):
-        self.log.info('Teardown')
+        log.info('Teardown')
         pykka.ActorRegistry.stop_all()
