@@ -21,4 +21,5 @@ do
 done
 
 rm -rf pub/_
+cp frontend/favicon.ico pub/ || true
 cp -r frontend/_ pub/
